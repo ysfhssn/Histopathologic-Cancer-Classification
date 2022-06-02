@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HCD</title>
+    <script defer src="tf.min.js"></script>
+    <script defer src="predict.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="container">
+        <div id="container-header">
+        <div id="header">
+            <div class="title">Cancer Detection</div>
+            <div class="sub-title">This algorithm will detect cancer cells based on images provided</div>
+        </div>
+        </div>
+        <form id="myform" action="">
+            <div id="container-form">
+            <label id="label-select" for="myfile">Select a file :</label>
+            <div class="sub-title" id="description-file">Choose the file you want to analyze.<br> Accepted files are .png, .jpg, .jpeg </div>
+            <input type="file" accept=".png, .jpg, .jpeg" id="myfile" name="myfile"><br>
+            <img id="myimg" src="" alt="your image" style="display:none; max-width:400px"/>
+            <input id='submit-button' type="submit">
+            <img id="mygif" src="./img/load.gif" alt="your image" style="display:none; max-width:400px"/>
+        </div>
+        </form>
+        <div id="container-pred">
+            <div id="pred"></div>
+        </div>
+    </div>
+</body>
+</html>

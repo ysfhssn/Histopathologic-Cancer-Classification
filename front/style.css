@@ -1,0 +1,136 @@
+
+
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color:#121212;
+    height:100%;
+    padding:0px;
+}
+
+#container{
+    /*background: url('img/bluebg.jpg') no-repeat center center fixed;*/
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 100%;
+    min-width: 1024px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.blur{
+    backdrop-filter: blur(8px);
+    height: 100vh;
+	width: 100%;
+}
+
+#container-form{
+    padding-top:30px;
+    padding-bottom:50px;
+    margin-top:30px;
+    width:75%;
+    display:flex;
+    margin-right:auto;
+    margin-left:auto;
+    flex-direction:column;
+    color: #A8F0FF;
+    background-color: #272727;
+    border-radius:10px;
+}
+
+#label-select{
+    font-size: 25px;
+    margin-right:auto;
+    margin-left:auto;
+    font-weight:bold;
+}
+
+#container-header{
+    display:flex;
+    margin-top:30px;
+    width:100%;
+}
+
+.title{
+    margin-right:auto;
+    margin-left:auto;
+    text-align: center;
+    font-size: 40px;
+}
+
+.sub-title{
+    margin-right:auto;
+    margin-left:auto;
+    font-size: 13px;
+}
+
+#submit-button{
+    margin-top:20px;
+    margin-right:auto;
+    margin-left:auto;
+    outline:none;
+    background-color:#A8F0FF;
+    border: 1px black solid;
+    border-radius:5px;
+    padding:5px;
+}
+
+#header{
+    color:#A8F0FF;
+    margin-right:auto;
+    margin-left:auto;
+    background-color: #272727;
+    padding:20px;
+    border-radius:10px;
+}
+
+#submit-button:hover{
+    cursor:pointer;
+}
+
+#myfile{
+    margin-top:30px;
+    margin-right:auto;
+    margin-left:auto;
+    font-family: 'Roboto', sans-serif;
+}
+
+#myfile:hover{
+    cursor:pointer;
+}
+
+#file-upload-button:hover{
+    cursor:pointer;
+}
+
+#myimg{
+    margin-top:10px;
+    margin-right:auto;
+    margin-left:auto;
+}
+
+#pred{
+    margin-top:20px;
+    margin-right:auto;
+    margin-left:auto;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#container-pred{
+    width:100%;
+    font-family: 'Roboto', sans-serif;
+    display:flex;
+    flex-direction:column;
+}
+
+#description-file{
+    margin-top:10px;
+}
