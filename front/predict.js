@@ -14,7 +14,7 @@ const loadingGif = document.getElementById("mygif")
 document.getElementById("myform").addEventListener("submit", async (e) => {
     e.preventDefault()
 
-    if (model !== null && image !== null) {
+    if (model !== null && image.src.startsWith("blob:")) {
         loadingGif.style.display = "block"
 
         const predTensor = tf.tidy(() => {
@@ -33,8 +33,8 @@ document.getElementById("myform").addEventListener("submit", async (e) => {
         predTensor.data().then(([pred]) => {
             document.getElementById("pred").textContent = (pred > 0.5 ? "Cancer" : "Not Cancer") + ` (${pred.toFixed(5)})`
             document.getElementById("pred").style.color = pred > 0.5 ? "red" : "green"
-            loadingGif.style.display = "none"
         }).catch(err => { console.error(err) })
+        .finally(() => { loadingGif.style.display = "none" })
 
         predTensor.dispose()
         console.log("Memory:", tf.memory())
