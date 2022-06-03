@@ -8,8 +8,9 @@ body{
     background: url(img/imgbg.jpg);
     background-size: 1920px 1080px;
     backdrop-filter: blur(10px);
-
-    
+    box-sizing: border-box;
+    width:100%;
+    margin:0px;
 }
 
 #container{
