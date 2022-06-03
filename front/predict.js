@@ -1,42 +1,54 @@
-let model = null
-tf.loadLayersModel("../tfjs-model2/model2.json").then(m => {
-    console.log("Model:", m)
-    model = m
-})
+const init = (async function main () {
 
-const image = document.getElementById("myimg")
-document.getElementById("myfile").addEventListener("change", (e) => {
-    image.src = URL.createObjectURL(e.target.files[0])
-    image.style.display = "block"
-})
+    const model = await tf.loadLayersModel("../tfjs-model2/model2.json")
+    console.log("Model:", model)
 
-const loadingGif = document.getElementById("mygif")
-document.getElementById("myform").addEventListener("submit", async (e) => {
-    e.preventDefault()
+    const image = document.getElementById("myimg")
+    document.getElementById("myfile").addEventListener("change", (e) => {
+        image.src = URL.createObjectURL(e.target.files[0])
+        image.style.display = "block"
+    })
 
-    if (model !== null && image.src.startsWith("blob:")) {
+    const loadingGif = document.getElementById("mygif")
+    const containerPred = document.getElementById("container-pred")
+    document.getElementById("myform").addEventListener("submit", async (e) => {
+        e.preventDefault()
         loadingGif.style.display = "block"
+        containerPred.style.display = "block"
 
-        const predTensor = tf.tidy(() => {
+        if (image !== null) {
             const tensor = tf.browser.fromPixels(image)
                 .resizeNearestNeighbor([96, 96])
                 .toFloat()
                 .div(tf.scalar(255))
                 .expandDims()
 
-            //tensor.print()
-            //console.log(tensor.shape)
+            tensor.print()
+            console.log(tensor.shape)
 
-            return model.predict(tensor)
-        })
+            const pred = await model.predict(tensor).data()
+            console.log(pred)
 
-        predTensor.data().then(([pred]) => {
-            document.getElementById("pred").textContent = (pred > 0.5 ? "Cancer" : "Not Cancer") + ` (${pred.toFixed(5)})`
-            document.getElementById("pred").style.color = pred > 0.5 ? "red" : "green"
-        }).catch(err => { console.error(err) })
-        .finally(() => { loadingGif.style.display = "none" })
+            loadingGif.style.display = "none" // TODO: loading gif not showing up ...
 
-        predTensor.dispose()
-        console.log("Memory:", tf.memory())
-    }
-})
+            // BEST THRESHOLD: 0.64063287
+            document.getElementById("pred").textContent = pred[0] > 0.5 ? "Cancer" : "Not Cancer"
+            if(document.getElementById("pred").textContent == "Cancer"){
+                containerPred.classList.remove('gradient-border');
+                containerPred.classList.add('gradient-border-cancer');
+                document.getElementById('not-cancer-description').style.display = "none";
+                document.getElementById('cancer-description').style.display = "block";
+                document.getElementById('not-cancer-icon').style.display = "none";
+                document.getElementById('cancer-icon').style.display = "block";
+            } else {
+                containerPred.classList.remove('gradient-border-cancer');
+                containerPred.classList.add('gradient-border');
+                document.getElementById('cancer-description').style.display = "none";
+                document.getElementById('cancer-icon').style.display = "none";
+                document.getElementById('not-cancer-icon').style.display = "block";
+                document.getElementById('not-cancer-description').style.display = "block";
+            }
+            document.getElementById("pred").style.color = pred[0] > 0.5 ? "red" : "green"
+        }
+    })
+})()
