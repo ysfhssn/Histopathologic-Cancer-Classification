@@ -14,25 +14,26 @@ class validation:
     self.model = model
     self.val_gen = val_gen
   
-  def predict():
-    val_gen.reset()
-    val_gen.batch_size = 1
-    val_gen.shuffle = False
+  def predict(self):
+    self.val_gen.reset()
+    self.val_gen.batch_size = 1
+    self.val_gen.shuffle = False
 
-    probs = model.predict(val_gen, verbose=1)
-    preds = (probs > 0.5) * 1
-    return preds[:10]
+    self.probs = self.model.predict(self.val_gen, verbose=1)
+    self.preds = (self.probs > 0.5) * 1
+    return self.preds[:10]
 
-  def updatePreds(threshold):
-    if probs != None:
-      preds = (probs > threshold) * 1
+  def updatePreds(self, threshold):
+    if self.probs != None:
+     self. preds = (self.probs > threshold) * 1
 
-  def getAccuracyScore():
-    return accuracy_score(val_gen.classes, preds)
+  def getAccuracyScore(self):
+    if self.probs != None:
+      return accuracy_score(self.val_gen.classes, self.preds)
 
-  def displayConfusionMatrix(modelName):
-    if val_gen != None and preds != []:
-      cm = confusion_matrix(val_gen.classes, preds)
+  def displayConfusionMatrix(self, modelName):
+    if self.val_gen != None and self.preds != []:
+      cm = confusion_matrix(self.val_gen.classes, self.preds)
       print(cm)
       ax = sns.heatmap(cm/np.sum(cm), annot=True, 
                   fmt='.2%', cmap='Blues')
@@ -48,9 +49,9 @@ class validation:
       ## Display the visualization of the Confusion Matrix.
       plt.show()
       
-  def displayCurve():
-    if val_gen != None and preds != None:
-      fpr, tpr, thresholds = roc_curve(val_gen.classes, probs)
+  def displayCurve(self):
+    if self.val_gen != None and self.preds != None:
+      fpr, tpr, thresholds = roc_curve(self.val_gen.classes,self. probs)
       auc_m1 = auc(fpr, tpr)
 
       plt.figure(figsize=(5, 5), dpi=100)
