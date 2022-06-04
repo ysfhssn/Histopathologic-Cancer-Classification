@@ -6,17 +6,18 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau, ModelCheckpoint, TensorBoard
 from tensorflow.keras.optimizers import Adam
 
-class model1:
+class model2:
   instance = None
   
   def __init__(self) -> None:
     if os.path.exists('model2.h5'):
       print('Loading model1...')
-      instance = load_model('model2.h5')
+      self.instance = load_model('model2.h5')
     else:
       print('Building and compiling model1...')
-      instance = self.build_compile_model2()
+      self.instance = self.build_compile_model2()
   
+  @staticmethod
   def build_compile_model2():
       kernel_size = (3,3)
       pool_size= (2,2)
@@ -28,7 +29,7 @@ class model1:
 
       # Model Structure
       model = Sequential()
-      model.add(Conv2D(first_filters, kernel_size, activation='relu', input_shape=((96,96), 3)))
+      model.add(Conv2D(first_filters, kernel_size, activation='relu', input_shape=(96,96, 3)))
       model.add(Conv2D(first_filters, kernel_size, activation='relu'))
       model.add(Conv2D(first_filters, kernel_size, activation='relu'))
       model.add(MaxPooling2D(pool_size=pool_size)) 
@@ -56,18 +57,16 @@ class model1:
 
       return model
   
-  def summary():
-    if instance != None:
-      return instance.summary()
+  def summary(self):
+    if self.instance != None:
+      return self.instance.summary()
   
-  def fit(train_gen, val_gen):
+  def fit(self, train_gen, val_gen, epochs):
     # It alters the learning rate based on metrics in each epoch
     reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=2, 
                                    verbose=1, mode='min', min_lr=0.00001)                                                  
     callbacks_list = [reduce_lr]
-
-    # Fitting the model
-    history = instance.fit(train_gen, 
-                    epochs=10, 
+    return self.instance.fit(train_gen, 
+                    epochs=epochs, 
                     validation_data=val_gen, 
                     callbacks=callbacks_list)
