@@ -2,6 +2,8 @@ let model = null
 tf.loadLayersModel("../tfjs-model2/model2.json").then(m => {
     model = m
     console.log("Model:", model)
+    document.getElementById("submit-button").disabled = false
+    document.getElementById("myfile").disabled = false
 })
 
 const image = document.getElementById("myimg")
