@@ -95,6 +95,13 @@ body{
     padding:5px;
 }
 
+#submit-button:hover{
+    background-color:white;
+    color: black;
+    transition:0.3s;
+    box-shadow: 0px 0px 100px 1px #0ff;
+}
+
 #header{
     color:#A8F0FF;
     margin-right:auto;
