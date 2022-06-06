@@ -16,11 +16,11 @@ The original PCam dataset contains duplicate images due to its probabilistic sam
 - [Feature maps visualization](https://towardsdatascience.com/convolutional-neural-network-feature-map-and-filter-visualization-f75012a5a49c) ❌
 - Test the models and create a submission file for kaggle ✔️
 - Hyperparameter tuning ✔️
-- [Transfer Learning](https://towardsdatascience.com/how-to-get-top-1-on-kaggle-and-help-with-histopathologic-cancer-detection-af729dc3e6f7) ❌
+- [Transfer Learning](https://towardsdatascience.com/how-to-get-top-1-on-kaggle-and-help-with-histopathologic-cancer-detection-af729dc3e6f7) ✔️
 - Frontend ✔️
 - Use tensorflowjs w/o memory leaks ✔️
 - Deploy second model w/ gh-pages ✔️
-- Code refactoring ❌
+- Code refactoring ✔️
 - Test on different datasets ✔️
 - Make a powerpoint presentation ✔️
 
