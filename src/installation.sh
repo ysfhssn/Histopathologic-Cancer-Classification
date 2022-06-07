@@ -1,3 +1,6 @@
+python3 -m venv env || python -m venv env
+source env/bin/activate || ./env/Scripts/activate
+
 pip install -r requirements.txt
 
 mkdir ~/.kaggle
